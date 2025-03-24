@@ -832,14 +832,14 @@ void NeoLocalPlanner::initialize(std::string name, tf2_ros::Buffer* tf, costmap_
 
 	dsrv_ = new dynamic_reconfigure::Server<NeoLocalPlannerConfig>(private_nh);
     dynamic_reconfigure::Server<NeoLocalPlannerConfig>::CallbackType cb =
-        boost::bind(&NeoLocalPlanner::reconfigureCB, this, _1, _2);
+        boost::bind(&NeoLocalPlanner::reconfigureCB, this, boost::placeholders::_1, boost::placeholders::_2);
     dsrv_->setCallback(cb);
 
 	m_tf = tf;
 	m_cost_map = costmap_ros;
 	m_base_frame = costmap_ros->getBaseFrameID();
 
-	m_odom_sub = nh.subscribe<nav_msgs::Odometry>("/odom", 1, boost::bind(&NeoLocalPlanner::odomCallback, this, _1));
+	m_odom_sub = nh.subscribe<nav_msgs::Odometry>("/odom", 1, boost::bind(&NeoLocalPlanner::odomCallback, this, boost::placeholders::_1));
 
 	m_local_plan_pub = private_nh.advertise<nav_msgs::Path>("local_plan", 1);
 	m_target_pose_pub = private_nh.advertise<geometry_msgs::PoseStamped>("target_pose", 1);
