@@ -30,7 +30,7 @@ include_directories(
 
 # dynamic reconfigure
 generate_dynamic_reconfigure_options(
-   cfg/NeoPlanner.cfg
+  cfg/NeoLocalPlanner.cfg
 )
 
 catkin_package(
@@ -47,18 +47,15 @@ catkin_package(
 )
 
 add_library(neo_local_planner src/NeoLocalPlanner.cpp)
-add_dependencies(neo_local_planner ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
+add_dependencies(neo_local_planner ${PROJECT_NAME}_gencfg)
 target_link_libraries(neo_local_planner ${catkin_LIBRARIES})
 
 install(TARGETS neo_local_planner
        ARCHIVE DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
        LIBRARY DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
+       RUNTIME DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
        )
 
 install(FILES blp_plugin.xml
     DESTINATION ${CATKIN_PACKAGE_SHARE_DESTINATION}
-)
-
-install(DIRECTORY include/
-  DESTINATION ${CATKIN_PACKAGE_INCLUDE_DESTINATION}
 )

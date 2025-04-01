@@ -32,7 +32,7 @@
  *  POSSIBILITY OF SUCH DAMAGE.
  *********************************************************************/
 
-#include "../include/NeoLocalPlanner.h"
+#include <neo_local_planner/NeoLocalPlanner.h>
 
 #include <tf2/utils.h>
 #include <tf2_sensor_msgs/tf2_sensor_msgs.h>
